@@ -43,8 +43,13 @@ Feature: Search car for rent
     Then date fields alert is displayed
     And results table isn't displayed
 
-  Scenario: a user get car rent results for desired car model
+  Scenario Outline: a user get car rent results for desired car model
     Given a user choose the "<Country>" and "<City>"
     And a user fill in required date fields: "07.02.2021", "28.02.2021"
-    When a user gives car model "Alfa Romeo"
-    Then the result table shows the expected model for rent
+    When a user gives car model "<Model>"
+    Then the result table shows the expected model "<Model>" for rent
+
+    Examples: Model
+    | Model         |
+    | Alfa Romeo    |
+    | Scoda Octavia |

@@ -19,6 +19,11 @@ class PageNotAvailable(Exception):
     pass
 
 
+class ResultsDoesNotMatchSearchCriteria(Exception):
+    """Raised if return search results doesn't match search criteria"""
+    pass
+
+
 @given('a user visit car rent search page')
 def step_impl(context):
     page = SearchPage(context)
@@ -215,10 +220,11 @@ def step_impl(context):
         pass
 
 
-@then('the result table shows the expected model for rent')
-def step_impl(context):
+@then('the result table shows the expected model "{model}" for rent')
+def step_impl(context, model):
     page = SearchPage(context)
-    page.results()
+    if model not in page.results():
+        raise ResultsDoesNotMatchSearchCriteria
 
 
 @then('car details are available')
