@@ -74,7 +74,7 @@ def step_impl(context, dropoff_date):
     page.set_drop_off_date(dropoff_date)
 
 
-@when('dates fields are empty')
+@step('dates fields are empty')
 def step_impl(context):
     page = SearchPage(context)
     pickup_date = page.pick_up_date.text
